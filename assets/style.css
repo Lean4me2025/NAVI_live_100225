@@ -3,15 +3,15 @@
   --bg:#0b1220;
   --card:#1f305a;
   --accent:#f7c948;
-  --text:#f5f8ff;
+  --text:#ffffff;
   --muted:#c4d7ff;
   --ok:#16a34a;
   --warn:#eab308;
   --danger:#ef4444;
-  --link:#7aa2f7;
+  --link:#aecdff;
 }
 *{box-sizing:border-box}
-html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Helvetica Neue",Arial,"Noto Sans",sans-serif;line-height:1.5}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;line-height:1.5}
 a{color:var(--link);text-decoration:none}
 a:hover{text-decoration:underline}
 .container{max-width:1100px;margin:0 auto;padding:24px}
@@ -19,71 +19,43 @@ a:hover{text-decoration:underline}
 .brand{display:flex;align-items:center;gap:12px}
 .brand .logo{width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#ffd7a1);box-shadow:0 0 24px rgba(247,201,72,.25)}
 .brand h1{font-size:1.25rem;margin:0}
-.badge{padding:6px 10px;border:1px solid #263146;border-radius:999px;color:var(--muted)}
-.card{background:var(--card);border:1px solid #1c2740;border-radius:14px;padding:18px;margin:12px 0;box-shadow:0 4px 16px rgba(0,0,0,.25)}
+.badge{padding:6px 10px;border:1px solid #263146;border-radius:999px;color:var(--text)}
+.plan-badge{background:var(--accent);color:#111;border:none;font-weight:700;box-shadow:0 0 12px rgba(247,201,72,.35)}
+.card{background:var(--card);border:1px solid #2f4370;border-radius:14px;padding:18px;margin:12px 0;box-shadow:0 4px 16px rgba(0,0,0,.25)}
 .grid{display:grid;gap:16px}
 .grid.cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .grid.cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
 @media (max-width:900px){.grid.cols-2,.grid.cols-3{grid-template-columns:1fr}}
-.kicker{letter-spacing:.1em;color:var(--muted);text-transform:uppercase;font-size:.75rem}
-h2{margin:0 0 6px 0}
-.lead{font-size:1.1rem;color:#cfe1ff}
-hr{border:none;border-top:1px solid #1e2a44;margin:18px 0}
-.button{display:inline-block;background:var(--accent);color:#1b1b1b;padding:10px 14px;border-radius:10px;font-weight:600;border:0;cursor:pointer}
-.button.secondary{background:#22314d;color:#cfe1ff}
-.button.ghost{background:transparent;border:1px solid #2a3a5a;color:#cfe1ff}
+.kicker{letter-spacing:.1em;color:var(--text);text-transform:uppercase;font-size:.75rem;opacity:.95}
+h2,h3{margin:0 0 6px 0;color:var(--text);font-weight:600}
+.lead{font-size:1.1rem;color:#eaf2ff}
+hr{border:none;border-top:1px solid #2f4370;margin:18px 0}
+.button{display:inline-block;background:var(--accent);color:#1b1b1b;padding:10px 14px;border-radius:10px;font-weight:700;border:0;cursor:pointer}
+.button.secondary{background:#223a73;color:#eaf2ff}
+.button.ghost{background:transparent;border:1px solid #3a548f;color:#eaf2ff}
+.button:hover{box-shadow:0 0 10px rgba(247,201,72,.4)}
 .toolbar{display:flex;gap:8px;flex-wrap:wrap}
-.input, select, textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #2a3a5a;background:#0e1627;color:#e6edf7}
-small.hint{color:var(--muted)}
-.tag{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;background:#0d182e;border:1px solid #243559;color:#b8c7e6;margin:2px 6px 2px 0}
-footer{color:#7d8db0;margin:24px 0}
+.input, select, textarea{width:100%;padding:10px 12px;border-radius:10px;border:1px solid #2f4370;background:#223a73;color:var(--text)}
+textarea::placeholder,input::placeholder{color:var(--muted)}
+small.hint,.hint{color:var(--muted)}
+.tag{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;background:#2e4470;border:1px solid #3d5a91;color:#fff;margin:2px 6px 2px 0;font-weight:600}
+footer{color:#b9c9ff;margin:24px 0}
 .list{margin:0;padding-left:18px}
 .center{display:flex;align-items:center;justify-content:center}
 .big-welcome{font-size:2.2rem;font-weight:800;letter-spacing:.01em;margin:4px 0 8px 0}
-.sub{color:#cfe1ff}
-.notice{border-left:4px solid var(--warn);padding:10px 12px;background:#0d172a;margin:12px 0;border-radius:6px}
+.sub{color:#eaf2ff}
+.notice{border-left:4px solid var(--warn);padding:10px 12px;background:#132548;margin:12px 0;border-radius:6px}
 .ok{color:var(--ok)} .warn{color:var(--warn)} .danger{color:var(--danger)}
 .print-note{display:none}@media print {.header,.toolbar,.print-hide{display:none}.print-note{display:block}}
 
-/* Contrast & polish update v2 */
-.card{border-top:1px solid #2f4370}
-.card h2,.card h3,.card .kicker{color:#ffffff}
-.input,textarea,select{background:#1f305a;border:1px solid #2f4370;color:#f5f8ff}
-.input::placeholder,textarea::placeholder{color:#c4d7ff}
-.input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 0 8px rgba(247,201,72,.35);outline:none}
-.tag{background:#2e4470;border:1px solid #3d5a91;color:#ffffff}
-.button:hover{box-shadow:0 0 10px rgba(247,201,72,.4)}
-
-/* --- Plan badge UX --- */
-.plan-badge{background:var(--accent); color:#111; border:none; font-weight:700; box-shadow:0 0 12px rgba(247,201,72,.35)}
-.plan-badge .small{font-weight:600; opacity:.8}
-
-/* --- Locked cards --- */
-.locked{opacity:.55; position:relative; filter:saturate(.6)}
-.locked::after{
-  content:"🔒 Upgrade to unlock";
-  position:absolute; right:12px; bottom:12px; font-size:.85rem;
-  color:#fff; background:rgba(15,22,40,.7); padding:6px 10px; border-radius:999px; border:1px solid #2f4370;
-}
-
-/* --- Section titles --- */
-.section-title{margin:4px 0 8px 0; font-size:1.1rem; font-weight:700; color:#fff}
-.subtle{color:var(--muted)}
-
-/* --- Highlight pills for NOVA SNAP --- */
+/* Highlight pills for NOVA SNAP */
 #nova-snap .tag{
-  background: linear-gradient(135deg, #2f5ebf, #1e3d78);
-  color: #ffffff;
-  border: 1px solid #f7c948; /* gold accent */
-  font-weight: 600;
-  box-shadow: 0 0 8px rgba(247,201,72,0.35);
+  background:linear-gradient(135deg,#2f5ebf,#1e3d78);
+  color:#ffffff;border:1px solid var(--accent);
+  box-shadow:0 0 8px rgba(247,201,72,.35);
 }
 
-/* --- Included tools glow --- */
-.included{
-  border-top: 3px solid #f7c948;
-  box-shadow: 0 0 10px rgba(247,201,72,0.22);
-}
-.included .button{ /* primary button stays bright */
-  box-shadow: 0 0 8px rgba(247,201,72,0.24);
-}
+/* Included vs locked tools */
+.included{border-top:3px solid var(--accent);box-shadow:0 0 10px rgba(247,201,72,.22)}
+.locked{opacity:.55;position:relative;filter:saturate(.6)}
+.locked::after{content:"🔒 Upgrade to unlock";position:absolute;right:12px;bottom:12px;font-size:.85rem;color:#fff;background:rgba(15,22,40,.7);padding:6px 10px;border-radius:999px;border:1px solid #2f4370}

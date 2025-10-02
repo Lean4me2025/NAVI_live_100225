@@ -1,41 +1,82 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>NOVA • Purpose Start</title>
-  <link rel="stylesheet" href="styles.css">
-  <script src="https://payhip.com/payhip.js" type="text/javascript"></script>
-</head>
-<body>
-  <main class="container">
-    <section class="card center">
-      <h1 style="font-size:2.6rem;font-weight:800;letter-spacing:.01em">WELCOME TO <span class="brand">NOVA</span></h1>
-      <p class="lead">I’ll help you <strong>discover your purpose</strong> — then turn it into strengths, direction, and next steps.</p>
 
-      <div id="facts" class="list" style="justify-content:center"></div>
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NAVI – Welcome</title>
+<link rel="stylesheet" href="assets/style.css">
+<script defer src="assets/app.js"></script>
+<script type="text/javascript" src="https://payhip.com/payhip.js"></script>
+</head><body>
+<div class="container">
+  <div class="header">
+    <div class="brand"><div class="logo"></div><h1>NAVI</h1></div>
+    <div id="plan-badge" class="badge plan-badge">Plan: –</div>
+  </div>
 
-      <div style="margin-top:18px">
-        <a href="#categories" id="startLink" class="btn primary" style="display:inline-block">Start → Choose My Categories</a>
+  <div class="card center" style="padding:28px">
+    <div style="max-width:760px">
+      <div class="kicker">Welcome</div>
+      <div class="big-welcome">Welcome to NAVI</div>
+      <p class="lead sub">I’ll turn your NOVA purpose and traits into a step-by-step career strategy — then equip you with the exact tools to execute.</p>
+      <div class="notice"><b>Heads up:</b> If you’ve just finished NOVA, your results are attached. Or load a sample below.</div>
+      <div class="toolbar" style="margin-top:12px">
+        <button class="button" onclick="go('strategy.html')">Start My Strategy</button>
+        <button class="button secondary" onclick="loadSample()">Load Sample NOVA Profile</button>
+        <div class="badge">Plan:</div>
+        <button class="button ghost" onclick="setPlan('starter')">Starter</button>
+        <button class="button ghost" onclick="setPlan('pro')">Pro</button>
+        <button class="button ghost" onclick="setPlan('mastery')">Mastery</button>
       </div>
-    </section>
-  </main>
-  <script src="data.js"></script>
-  <script src="script.js"></script>
-  <script>
-    // render facts from data.js
-    (function(){
-      try{
-        var facts = window.NOVA_FACTS || [];
-        var box = document.getElementById('facts');
-        facts.forEach(function(t){
-          var d = document.createElement('div');
-          d.className = 'badge';
-          d.textContent = t;
-          box.appendChild(d);
-        });
-      }catch(e){}
-    })();
-  </script>
-</body>
-</html>
+      <hr>
+      <div class="grid cols-3">
+        <div class="card">
+          <div class="kicker">Starter</div><h2>Essentials</h2>
+          <ul class="list"><li>Resume Builder</li><li>Basic Job Suggestions</li></ul>
+        </div>
+        <div class="card">
+          <div class="kicker">Pro</div><h2>Get Traction</h2>
+          <p class="hint">Includes everything in <b>Starter</b>, plus:</p>
+          <ul class="list"><li>Unlimited Cover Letters</li><li>Company Intel Outlines</li><li>Advanced Filters + Saved Search</li></ul>
+        </div>
+        <div class="card">
+          <div class="kicker">Mastery</div><h2>Level Up</h2>
+          <p class="hint">Includes everything in <b>Pro</b>, plus:</p>
+          <ul class="list"><li>Career Roadmap PDF</li><li>Priority Coaching Link</li></ul>
+        </div>
+      </div>
+      <hr>
+      <div class="card">
+        <div class="kicker">Upgrade</div>
+        <h2>Upgrade Options</h2>
+        <div id="upgradeWelcome"></div>
+      </div>
+    </div>
+  </div>
+  <footer class="center">Built for NOVA → NAVI flow.</footer>
+</div>
+<script>
+function loadSample(){
+  const sample={
+    name:"Sample Explorer",
+    reflection:"Transitioning into data/ops leadership; servant-leader; process + analytics + teaching.",
+    categories:["Business & Operations","Technology & Data"],
+    traits:["Analytical","Process-Driven","People Developer","Systems Thinker","Persistent","Purpose-Led"],
+    roles:["Business Process Manager","Business Analyst (IT/Compliance)","Operations Excellence Lead","Analytics Product Owner"],
+    careerState:"Transitioning / changing careers"
+  };
+  localStorage.setItem('novaResults', JSON.stringify(sample));
+  alert("Sample NOVA profile loaded. Proceed to Strategy.");
+}
+const PRICING={pro:"$99/mo", mastery:"$149/mo"};
+const PAYHIP={pro:"https://payhip.com/b/re4Hy", mastery:"https://payhip.com/b/re4Hy"}; // replace mastery if needed
+function renderUpgradeWelcome(){
+  const p=getPlan(); const wrap=qs('#upgradeWelcome'); if(!wrap) return;
+  const pro=`<div class="card included"><h3>Pro — ${PRICING.pro}</h3><p class="sub">Includes everything in <b>Starter</b>, plus:</p><ul class="list"><li>Unlimited Cover Letters</li><li>Company Intel Outlines</li><li>Advanced Filters & Saved Search</li></ul><div class="toolbar"><a class="button" href="${PAYHIP.pro}">Upgrade to Pro</a></div></div>`;
+  const mast=`<div class="card included"><h3>Mastery — ${PRICING.mastery}</h3><p class="sub">Includes everything in <b>Pro</b>, plus:</p><ul class="list"><li>Career Roadmap PDF</li><li>Priority Coaching Link</li></ul><div class="toolbar"><a class="button" href="${PAYHIP.mastery}">Upgrade to Mastery</a></div></div>`;
+  if(p==='starter') wrap.innerHTML=pro+mast;
+  else if(p==='pro') wrap.innerHTML=mast;
+  else wrap.innerHTML='<p class="sub">You already have every tool unlocked ✅</p>';
+}
+document.addEventListener('DOMContentLoaded', renderUpgradeWelcome);
+document.addEventListener('planchange', renderUpgradeWelcome);
+</script>
+</body></html>

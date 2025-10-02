@@ -1,22 +1,18 @@
-<!doctype html>
-<html lang="en">
-<head>
+
+<!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Priority Coaching</title>
+<title>Priority Coaching Link</title>
 <link rel="stylesheet" href="../assets/style.css">
 <script defer src="../assets/app.js"></script>
-</head>
-<body>
+</head><body>
 <div class="container">
-  <div class="header">
-    <div class="brand"><div class="logo"></div><h1>Priority Coaching Link</h1></div>
-    <div id="plan-badge" class="badge">Plan: –</div>
-  </div>
-  <div class="card">
-    <p class="lead">Use your priority link to book coaching. Replace the URL below with your preferred scheduler.</p>
-    <a class="button" href="#" onclick="alert('Replace with your private booking link.');return false;">Open Booking</a>
-    <p class="hint">Admin: edit tools/coaching.html to hardcode your private link when ready.</p>
-  </div>
+  <div class="header"><div class="brand"><div class="logo"></div><h1>Priority Coaching Link</h1></div><div id="plan-badge" class="badge plan-badge">Plan: –</div></div>
+  
+<div class="card">
+  <p class="lead">Use your priority link to book coaching. Replace the URL below with your preferred scheduler.</p>
+  <a class="button" href="#" onclick="alert('Replace with your private booking link.');return false;">Open Booking</a>
+  <p class="hint">Admin: edit tools/coaching.html to hardcode your private link when ready.</p>
+</div>
 
   <div class="card">
     <div class="toolbar">
@@ -25,11 +21,11 @@
       <button class="button" onclick="goNext()">Next ▶</button>
     </div>
   </div>
-
 </div>
+
 <script>
-function goNext(){ goNextFrom(coaching); }
-function goPrev(){ goPrevFrom(coaching); }
+function goNext(){ goNextFrom('coaching'); }
+function goPrev(){ goPrevFrom('coaching'); }
 </script>
-</body>
-</html>
+
+</body></html>

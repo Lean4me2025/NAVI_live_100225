@@ -1,39 +1,48 @@
-<!doctype html>
-<html lang="en">
-<head>
+
+<!doctype html><html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Company Intel Outline</title>
 <link rel="stylesheet" href="../assets/style.css">
 <script defer src="../assets/app.js"></script>
-</head>
-<body>
+</head><body>
 <div class="container">
-  <div class="header">
-    <div class="brand"><div class="logo"></div><h1>Company Intel Outline</h1></div>
-    <div id="plan-badge" class="badge">Plan: –</div>
-  </div>
-  <div class="card">
-    <div class="kicker">Research Template</div>
-    <p class="lead">Use this outline to prepare for interviews and outreach.</p>
-    <ol class="list">
-      <li>Company snapshot (mission, products, markets)</li>
-      <li>Org cues (hiring manager, team structure, stakeholders)</li>
-      <li>Growth & risk signals (earnings, funding, news)</li>
-      <li>Process maturity (Ops/Lean, IT controls, analytics stack)</li>
-      <li>Your 30/60/90 plan (aligned to pain points)</li>
-    </ol>
-  </div>
-  <div class="card">
-    <div class="kicker">Notes</div>
-    <textarea id="notes" class="input" rows="12" placeholder="Paste findings and bullets here"></textarea>
-    <div class="toolbar" style="margin-top:8px">
-      <button class="button" onclick="saveNotes()">Save</button>
-      <button class="button ghost" onclick="window.print()">Print / Save PDF</button>
-    </div>
+  <div class="header"><div class="brand"><div class="logo"></div><h1>Company Intel Outline</h1></div><div id="plan-badge" class="badge plan-badge">Plan: –</div></div>
+  
+<div class="card">
+  <div class="kicker">Research Template</div>
+  <p class="lead">Use this outline to prepare for interviews and outreach.</p>
+  <ol class="list">
+    <li>Company snapshot (mission, products, markets)</li>
+    <li>Org cues (hiring manager, team structure, stakeholders)</li>
+    <li>Growth & risk signals (earnings, funding, news)</li>
+    <li>Process maturity (Ops/Lean, IT controls, analytics stack)</li>
+    <li>Your 30/60/90 plan (aligned to pain points)</li>
+  </ol>
+</div>
+<div class="card">
+  <div class="kicker">Notes</div>
+  <textarea id="notes" class="input" rows="12" placeholder="Paste findings and bullets here"></textarea>
+  <div class="toolbar" style="margin-top:8px">
+    <button class="button" onclick="saveNotes()">Save</button>
+    <button class="button ghost" onclick="window.print()">Print / Save PDF</button>
   </div>
 </div>
 <script>
-function saveNotes(){ save('naviIntelNotes', {text: qs('#notes').value, savedAt:new Date().toISOString()}); alert('Saved.'); }
+function saveNotes(){ save('naviIntelNotes',{text:qs('#notes').value,savedAt:new Date().toISOString()}); alert('Saved.'); }
 </script>
-</body>
-</html>
+
+  <div class="card">
+    <div class="toolbar">
+      <button class="button ghost" onclick="go('../dashboard.html')">Back to Dashboard</button>
+      <button class="button secondary" onclick="goPrev()">◀ Prev</button>
+      <button class="button" onclick="goNext()">Next ▶</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function goNext(){ goNextFrom('intel'); }
+function goPrev(){ goPrevFrom('intel'); }
+</script>
+
+</body></html>

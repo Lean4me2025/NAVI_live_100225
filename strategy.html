@@ -1,42 +1,39 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!doctype html><html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NAVI – Strategy (Five W’s + How)</title>
 <link rel="stylesheet" href="assets/style.css">
 <script defer src="assets/app.js"></script>
-</head>
-<body>
+</head><body>
 <div class="container">
   <div class="header">
-    <div class="brand">
-      <div class="logo"></div>
-      <h1>NAVI</h1>
-    </div>
-    <div id="plan-badge" class="badge">Plan: –</div>
+    <div class="brand"><div class="logo"></div><h1>NAVI</h1></div>
+    <div id="plan-badge" class="badge plan-badge">Plan: –</div>
   </div>
 
-  <div class="card">
-    <div class="kicker">Step 1</div>
-    <h2>Five W’s + How</h2>
-    <p class="lead">Rooted in your NOVA results. Modify anything — this is your living strategy.</p>
-  </div>
+  <div class="card"><div class="kicker">Step 1</div><h2>Five W’s + How</h2><p class="lead">Rooted in your NOVA results — then tailored by you. Save anytime.</p></div>
 
   <div class="grid cols-2">
     <div class="card">
       <div class="kicker">Who</div>
+      <div id="careerStateLead" class="notice" style="display:none"></div>
       <textarea id="who" rows="5" class="input" placeholder="Who you are — integrate traits, strengths, leadership style"></textarea>
       <small class="hint">Auto-filled from NOVA traits.</small>
     </div>
     <div class="card">
       <div class="kicker">What</div>
-      <textarea id="what" rows="5" class="input" placeholder="What roles fit — mapped to categories/traits"></textarea>
-      <small class="hint">Auto-filled from NOVA roles.</small>
+      <textarea id="what" rows="4" class="input" placeholder="What roles fit — mapped to categories/traits"></textarea>
+      <div id="roleCards" class="grid cols-2" style="margin-top:10px"></div>
+      <div class="grid cols-2" style="margin-top:8px">
+        <div><label class="small hint">Primary role focus</label><select id="primaryRole" class="input"></select></div>
+        <div><label class="small hint">Focus area (keywords)</label><input id="focus" class="input" placeholder="e.g., SOX controls, process excellence, Power BI"></div>
+      </div>
+      <small class="hint">Choose one focus role (you can change this anytime).</small>
     </div>
     <div class="card">
       <div class="kicker">Why</div>
       <textarea id="why" rows="4" class="input" placeholder="Your motivation/legacy statement"></textarea>
+      <div id="careerStateBox" class="hint" style="margin-top:6px"></div>
     </div>
     <div class="card">
       <div class="kicker">When</div>
@@ -44,7 +41,16 @@
     </div>
     <div class="card">
       <div class="kicker">Where</div>
-      <textarea id="where" rows="4" class="input" placeholder="Location preferences, remote/hybrid, relocation comfort"></textarea>
+      <textarea id="where" rows="3" class="input" placeholder="Location preferences, relocation comfort"></textarea>
+      <div class="grid cols-2" style="margin-top:8px">
+        <input id="city" class="input" placeholder="City (e.g., Phoenix)">
+        <input id="state" class="input" placeholder="State/Region (e.g., AZ)">
+      </div>
+      <div class="toolbar" style="margin-top:8px">
+        <label class="tag"><input id="remote" type="checkbox" style="margin-right:6px"> Remote</label>
+        <label class="tag"><input id="hybrid" type="checkbox" style="margin-right:6px"> Hybrid</label>
+        <label class="tag"><input id="onsite" type="checkbox" style="margin-right:6px"> On‑site</label>
+      </div>
     </div>
     <div class="card">
       <div class="kicker">How</div>
@@ -55,8 +61,10 @@
   <div class="card">
     <div class="toolbar">
       <button class="button" onclick="saveStrategy()">Save Strategy</button>
-      <button class="button secondary" onclick="go('dashboard.html')">Go to My Dashboard</button>
-      <button class="button ghost" onclick="window.print()">Print / Save as PDF</button>
+      <button class="button secondary" onclick="applyToFilters()">Apply to Filters</button>
+      <button class="button ghost" onclick="resetFromNova()">Reset from NOVA</button>
+      <button class="button" onclick="go('dashboard.html')">Back to Dashboard</button>
+      <button class="button ghost" onclick="window.print()">Print / Save PDF</button>
     </div>
     <small class="hint">Your strategy saves locally in your browser.</small>
     <div class="print-note">Printed from NAVI Strategy.</div>
@@ -66,23 +74,130 @@
 </div>
 
 <script>
+const ROLE_INFO={
+  "Business Analyst (IT/Compliance)":[
+    "Gather and document business/IT requirements",
+    "Map processes and controls (e.g., SOX, audit)",
+    "Liaise between business stakeholders and IT teams",
+    "Analyze data and recommend improvements",
+    "Create specs, test cases, and documentation"
+  ],
+  "Business Process Manager":[
+    "Own cross‑functional process design and governance",
+    "Lead continuous improvement (Lean/Six Sigma)",
+    "Define KPIs/dashboards to track performance",
+    "Partner with stakeholders to implement changes",
+    "Standardize and scale best practices"
+  ],
+  "Operations Excellence Lead":[
+    "Drive Lean/CI programs and kaizen events",
+    "Diagnose bottlenecks and reduce waste",
+    "Coach teams on problem solving and change",
+    "Establish metrics and sustainment routines",
+    "Deliver measurable cost/quality/time impacts"
+  ],
+  "Analytics Product Owner":[
+    "Define vision and backlog for analytics products",
+    "Translate user needs into epics/stories",
+    "Prioritize roadmap and coordinate delivery",
+    "Partner with data/engineering, UX, and business",
+    "Measure adoption and outcomes"
+  ],
+  "Data Analyst":[
+    "Collect, clean, and analyze data sets",
+    "Build reports and dashboards (e.g., Power BI)",
+    "Identify trends and insights for decisions",
+    "Collaborate with business stakeholders",
+    "Ensure data quality and documentation"
+  ],
+  "Process Improvement Lead":[
+    "Lead DMAIC/PDCA projects and workshops",
+    "Map current/future state, quantify benefits",
+    "Implement solutions and change management",
+    "Establish control plans and training",
+    "Report results to leadership"
+  ],
+  "BPM Specialist":[
+    "Model processes in BPM tools",
+    "Define roles, rules, and SLAs",
+    "Integrate systems and automate workflows",
+    "Monitor performance and compliance",
+    "Continuously refine with stakeholders"
+  ],
+  "Training & Enablement Lead":[
+    "Develop curricula and learning paths",
+    "Create materials, labs, and job aids",
+    "Facilitate sessions and measure outcomes",
+    "Partner with SMEs and leadership",
+    "Drive adoption of new ways of working"
+  ],
+  "Change Management Analyst":[
+    "Assess change impacts and stakeholders",
+    "Plan communications and training",
+    "Support readiness, adoption, and feedback",
+    "Track risks and issues during rollout",
+    "Document lessons learned"
+  ],
+  "Product Owner (Analytics)":[
+    "Prioritize analytics backlog and features",
+    "Align stakeholders on value and scope",
+    "Accept increments and manage releases",
+    "Track usage and iterate on feedback",
+    "Ensure data governance considerations"
+  ],
+  "Solution Architect (Ops)":[
+    "Design cross‑system solutions for operations",
+    "Align architecture with business capabilities",
+    "Define integrations, data flows, and controls",
+    "Support build vs. buy decisions",
+    "Oversee non‑functional requirements"
+  ],
+  "Program Coordinator":[
+    "Support planning, scheduling, and reporting",
+    "Track milestones, dependencies, and risks",
+    "Facilitate meetings and communications",
+    "Maintain documentation and action logs",
+    "Assist budget/benefit tracking"
+  ],
+  "Project Manager":[
+    "Plan scope, schedule, resources, and budget",
+    "Manage delivery and vendor coordination",
+    "Mitigate risks and communicate status",
+    "Lead ceremonies and approvals",
+    "Close projects and capture learnings"
+  ]
+};
+
 function hydrate(){
-  const nova = getNova();
-  const s = load('naviStrategy', null) || {};
-  const who = qs('#who'), wht=qs('#what'), why=qs('#why'), when=qs('#when'), where=qs('#where'), how=qs('#how');
+  const nova=getNova(); const s=load('naviStrategy',{})||{};
+  const who=qs('#who'), wht=qs('#what'), why=qs('#why'), when=qs('#when'), where=qs('#where'), how=qs('#how');
   if(nova){
     if(!s.who) who.value = `Traits: ${nova.traits?.join(', ')||''}\nReflection: ${nova.reflection||''}`.trim();
     if(!s.what) wht.value = `Roles: ${nova.roles?.join(', ')||''}\nCategories: ${nova.categories?.join(', ')||''}`.trim();
     if(!s.why)  why.value = `Purpose: ${nova.reflection||'To serve, build, and multiply value.'}`;
   }
-  // Merge saved
-  who.value = s.who ?? who.value;
-  wht.value = s.what ?? wht.value;
-  why.value = s.why ?? why.value;
-  when.value = s.when ?? when.value;
-  where.value = s.where ?? where.value;
-  how.value = s.how ?? how.value;
+  who.value = s.who ?? who.value; wht.value = s.what ?? wht.value; why.value = s.why ?? why.value;
+  when.value = s.when ?? when.value; where.value = s.where ?? where.value; how.value = s.how ?? how.value;
+  qs('#city').value = s.city || ''; qs('#state').value = s.state || ''; qs('#focus').value = s.focus || '';
+  ['remote','hybrid','onsite'].forEach(id=>{ const el=qs('#'+id); if(el) el.checked = !!s[id]; });
+
+  const lead=qs('#careerStateLead'); const cs=qs('#careerStateBox');
+  if(nova && nova.careerState){ if(lead){ lead.style.display='block'; lead.innerHTML = `<b>You said:</b> ${nova.careerState}. We’ll tailor steps accordingly.`; } if(cs){ cs.textContent='Career state: '+nova.careerState; } }
+
+  // Roles
+  const roles = Array.isArray(nova?.roles)? nova.roles: [];
+  const sel = qs('#primaryRole'); if(sel){ sel.innerHTML = roles.map(r=>`<option value="${r}">${r}</option>`).join('') || '<option value="">(Add roles in What)</option>'; if(s.primaryRole && roles.includes(s.primaryRole)) sel.value = s.primaryRole; }
+  const wrap = qs('#roleCards'); if(wrap){ wrap.innerHTML = roles.map(r=>{
+      const bullets=(ROLE_INFO[r]||['Responsibilities vary by company.']).map(b=>`<li>${b}</li>`).join('');
+      return `<div class="card"><h3 style="margin:6px 0">${r}</h3><ul class="list">${bullets}</ul>
+      <div class="toolbar"><button class="button secondary" onclick="setFocusRole('${r}')">Set as Focus</button>
+      <button class="button ghost" onclick="toggleMore(this)">More Info</button></div>
+      <div class="hint" style="display:none;margin-top:8px">Outlook and pay vary by industry/region; use Company Intel for specifics.</div></div>`;
+    }).join(''); }
 }
+function setFocusRole(role){ const s=load('naviStrategy',{}); s.primaryRole=role; save('naviStrategy',s); const sel=qs('#primaryRole'); if(sel) sel.value=role; alert('Focus role set to '+role+' — Resume & Job Suggestions will use this.'); }
+function toggleMore(btn){ const box=btn.parentElement.nextElementSibling; if(!box) return; box.style.display = (box.style.display==='none') ? 'block' : 'none'; }
+
 function saveStrategy(){
   const s = {
     who: qs('#who').value.trim(),
@@ -91,12 +206,29 @@ function saveStrategy(){
     when: qs('#when').value.trim(),
     where: qs('#where').value.trim(),
     how: qs('#how').value.trim(),
+    city: qs('#city').value.trim(),
+    state: qs('#state').value.trim(),
+    focus: qs('#focus').value.trim(),
+    remote: qs('#remote').checked,
+    hybrid: qs('#hybrid').checked,
+    onsite: qs('#onsite').checked,
+    primaryRole: qs('#primaryRole') ? qs('#primaryRole').value : '',
     savedAt: new Date().toISOString()
   };
-  save('naviStrategy', s);
-  alert('Strategy saved.');
+  save('naviStrategy', s); alert('Strategy saved.');
 }
+function applyToFilters(){
+  const s=load('naviStrategy',{});
+  const roles=[s.primaryRole||''].filter(Boolean).join('; ');
+  const loc=[qs('#city').value, qs('#state').value].filter(Boolean).join(', ');
+  const inc=[qs('#focus').value, s.what].filter(Boolean).join(', ');
+  const modes=['remote','hybrid','onsite'].filter(id=>qs('#'+id)?.checked).join('/');
+  const f={roles, locs:(loc + (modes? ' • '+modes:'')), min:0, inc, exc:''};
+  save('naviFilters', f);
+  alert('Applied to Filters. Open Advanced Filters to review.');
+}
+function resetFromNova(){ localStorage.removeItem('naviStrategy'); hydrate(); alert('Strategy reset from NOVA data.'); }
+
 document.addEventListener('DOMContentLoaded', hydrate);
 </script>
-</body>
-</html>
+</body></html>
