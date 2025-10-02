@@ -1,0 +1,402 @@
+[
+  {
+    "id": "analytical_thinking",
+    "label": "Analytical Thinking",
+    "categories": [
+      "finance_analytics",
+      "technology",
+      "business"
+    ]
+  },
+  {
+    "id": "process_improvement",
+    "label": "Process Improvement",
+    "categories": [
+      "business",
+      "operations_logistics",
+      "engineering"
+    ]
+  },
+  {
+    "id": "problem_solving",
+    "label": "Problem Solving",
+    "categories": [
+      "engineering",
+      "technology",
+      "business"
+    ]
+  },
+  {
+    "id": "customer_empathy",
+    "label": "Customer Empathy",
+    "categories": [
+      "sales_service",
+      "healthcare",
+      "public_legal"
+    ]
+  },
+  {
+    "id": "communication",
+    "label": "Clear Communication",
+    "categories": [
+      "business",
+      "education_training",
+      "sales_service"
+    ]
+  },
+  {
+    "id": "data_visualization",
+    "label": "Data Visualization",
+    "categories": [
+      "finance_analytics",
+      "technology",
+      "business"
+    ]
+  },
+  {
+    "id": "sql_proficiency",
+    "label": "SQL Proficiency",
+    "categories": [
+      "technology",
+      "finance_analytics"
+    ]
+  },
+  {
+    "id": "python_scripting",
+    "label": "Python Scripting",
+    "categories": [
+      "technology",
+      "engineering"
+    ]
+  },
+  {
+    "id": "lean_six_sigma",
+    "label": "Lean Six Sigma",
+    "categories": [
+      "operations_logistics",
+      "business",
+      "engineering"
+    ]
+  },
+  {
+    "id": "project_management",
+    "label": "Project Management",
+    "categories": [
+      "business",
+      "engineering",
+      "operations_logistics"
+    ]
+  },
+  {
+    "id": "compliance_risk",
+    "label": "Compliance & Risk",
+    "categories": [
+      "public_legal",
+      "finance_analytics",
+      "business"
+    ]
+  },
+  {
+    "id": "it_sox",
+    "label": "IT SOX & Controls",
+    "categories": [
+      "technology",
+      "finance_analytics"
+    ]
+  },
+  {
+    "id": "privacy_security",
+    "label": "Privacy & Security",
+    "categories": [
+      "technology",
+      "public_legal"
+    ]
+  },
+  {
+    "id": "ux_design",
+    "label": "UX Design",
+    "categories": [
+      "creative_media",
+      "technology"
+    ]
+  },
+  {
+    "id": "copywriting",
+    "label": "Copywriting",
+    "categories": [
+      "creative_media",
+      "business"
+    ]
+  },
+  {
+    "id": "sales_strategy",
+    "label": "Sales Strategy",
+    "categories": [
+      "sales_service",
+      "business"
+    ]
+  },
+  {
+    "id": "account_management",
+    "label": "Account Management",
+    "categories": [
+      "sales_service",
+      "business"
+    ]
+  },
+  {
+    "id": "teaching_coaching",
+    "label": "Teaching & Coaching",
+    "categories": [
+      "education_training",
+      "business"
+    ]
+  },
+  {
+    "id": "curriculum_design",
+    "label": "Curriculum Design",
+    "categories": [
+      "education_training",
+      "creative_media"
+    ]
+  },
+  {
+    "id": "supply_chain",
+    "label": "Supply Chain",
+    "categories": [
+      "operations_logistics",
+      "business"
+    ]
+  },
+  {
+    "id": "quality_assurance",
+    "label": "Quality Assurance",
+    "categories": [
+      "engineering",
+      "operations_logistics",
+      "technology"
+    ]
+  },
+  {
+    "id": "reliability_testing",
+    "label": "Reliability Testing",
+    "categories": [
+      "engineering"
+    ]
+  },
+  {
+    "id": "systems_thinking",
+    "label": "Systems Thinking",
+    "categories": [
+      "engineering",
+      "technology",
+      "business"
+    ]
+  },
+  {
+    "id": "cloud_infra",
+    "label": "Cloud Infrastructure",
+    "categories": [
+      "technology"
+    ]
+  },
+  {
+    "id": "api_integration",
+    "label": "API Integration",
+    "categories": [
+      "technology",
+      "business"
+    ]
+  },
+  {
+    "id": "etl_pipelines",
+    "label": "ETL Pipelines",
+    "categories": [
+      "technology",
+      "finance_analytics"
+    ]
+  },
+  {
+    "id": "power_bi",
+    "label": "Power BI",
+    "categories": [
+      "finance_analytics",
+      "business",
+      "technology"
+    ]
+  },
+  {
+    "id": "excel_advanced",
+    "label": "Excel (Advanced)",
+    "categories": [
+      "finance_analytics",
+      "business"
+    ]
+  },
+  {
+    "id": "financial_modeling",
+    "label": "Financial Modeling",
+    "categories": [
+      "finance_analytics",
+      "business"
+    ]
+  },
+  {
+    "id": "budget_forecasting",
+    "label": "Budget & Forecasting",
+    "categories": [
+      "finance_analytics",
+      "business"
+    ]
+  },
+  {
+    "id": "healthcare_admin",
+    "label": "Healthcare Administration",
+    "categories": [
+      "healthcare",
+      "public_legal"
+    ]
+  },
+  {
+    "id": "clinical_compliance",
+    "label": "Clinical Compliance",
+    "categories": [
+      "healthcare"
+    ]
+  },
+  {
+    "id": "grant_writing",
+    "label": "Grant Writing",
+    "categories": [
+      "public_legal",
+      "education_training"
+    ]
+  },
+  {
+    "id": "policy_analysis",
+    "label": "Policy Analysis",
+    "categories": [
+      "public_legal"
+    ]
+  },
+  {
+    "id": "technical_writing",
+    "label": "Technical Writing",
+    "categories": [
+      "technology",
+      "engineering",
+      "creative_media"
+    ]
+  },
+  {
+    "id": "automation_rpa",
+    "label": "Automation / RPA",
+    "categories": [
+      "technology",
+      "operations_logistics"
+    ]
+  },
+  {
+    "id": "testing_qa",
+    "label": "Testing & QA (Software)",
+    "categories": [
+      "technology"
+    ]
+  },
+  {
+    "id": "product_management",
+    "label": "Product Management",
+    "categories": [
+      "business",
+      "technology",
+      "creative_media"
+    ]
+  },
+  {
+    "id": "change_management",
+    "label": "Change Management",
+    "categories": [
+      "business",
+      "education_training"
+    ]
+  },
+  {
+    "id": "negotiation",
+    "label": "Negotiation",
+    "categories": [
+      "sales_service",
+      "business"
+    ]
+  },
+  {
+    "id": "presentation_skills",
+    "label": "Presentation Skills",
+    "categories": [
+      "business",
+      "education_training"
+    ]
+  },
+  {
+    "id": "research_methods",
+    "label": "Research Methods",
+    "categories": [
+      "education_training",
+      "finance_analytics"
+    ]
+  },
+  {
+    "id": "industrial_safety",
+    "label": "Industrial Safety",
+    "categories": [
+      "engineering",
+      "operations_logistics"
+    ]
+  },
+  {
+    "id": "maintenance_planning",
+    "label": "Maintenance Planning",
+    "categories": [
+      "engineering",
+      "operations_logistics"
+    ]
+  },
+  {
+    "id": "inventory_optimization",
+    "label": "Inventory Optimization",
+    "categories": [
+      "operations_logistics",
+      "finance_analytics"
+    ]
+  },
+  {
+    "id": "customer_success",
+    "label": "Customer Success",
+    "categories": [
+      "sales_service",
+      "business",
+      "technology"
+    ]
+  },
+  {
+    "id": "seo_sem",
+    "label": "SEO / SEM",
+    "categories": [
+      "creative_media",
+      "business"
+    ]
+  },
+  {
+    "id": "video_editing",
+    "label": "Video Editing",
+    "categories": [
+      "creative_media"
+    ]
+  },
+  {
+    "id": "digital_illustration",
+    "label": "Digital Illustration",
+    "categories": [
+      "creative_media"
+    ]
+  }
+]

@@ -1,0 +1,42 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Plans • NOVA</title>
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body data-page="plan">
+  <div class="container step">
+    <div class="header">
+      <div class="logo">🌟 NOVA</div>
+      <a class="btn ghost" href="traits.html">Back</a>
+    </div>
+    <div class="card">
+      <h2 class="title">Choose a plan</h2>
+      <p class="subtitle">Select a plan to proceed to Navi. Family members can use a PIN to skip payment.</p>
+      <div id="family-badge" class="badge hidden">✅ Family Pass active</div>
+      <div style="display:grid; gap:12px; grid-template-columns:1fr 1fr; margin-top:12px">
+        <div class="card">
+          <label for="pin">Enter Family PIN</label>
+          <input id="pin" type="password" placeholder="Enter PIN e.g., FAMILY2025">
+          <div class="footer">
+            <button id="pin-btn" class="btn">Activate Family Pass</button>
+          </div>
+          <p class="small">Recognized PINs: provided privately to family. (Stored locally only.)</p>
+        </div>
+        <div class="card">
+          <div class="title">Purpose Book</div>
+          <p class="subtitle">Get the foundation: “How to Know Your Purpose”.</p>
+          <a href="https://payhip.com/b/N7Lvg" class="payhip-buy-button" data-theme="green" data-product="N7Lvg">Buy Now</a>
+        </div>
+      </div>
+      <hr>
+      <div id="plans" class="grid cols-3"></div>
+      <div class="small" style="margin-top:12px">After purchase, click “Start” to proceed. With Family Pass, you can start immediately.</div>
+    </div>
+  </div>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

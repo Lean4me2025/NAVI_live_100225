@@ -1,0 +1,44 @@
+[
+  {
+    "id": "starter",
+    "name": "Starter",
+    "price": "29.99/mo",
+    "features": [
+      "Nova 50\u2011trait discovery + PDF",
+      "Basic resume builder",
+      "Standard cover letter generator",
+      "Job match suggestions",
+      "1 Pro doc preview / month",
+      "Navi\u2019s Golden Nugget newsletter"
+    ],
+    "payhip": null
+  },
+  {
+    "id": "pro",
+    "name": "Pro",
+    "price": "99/mo",
+    "features": [
+      "Everything in Starter",
+      "Resume rewrite AI (unlimited)",
+      "Unlimited cover letters",
+      "Company intelligence reports",
+      "Advanced job filters + saved searches",
+      "Priority support"
+    ],
+    "payhip": "re4Hy"
+  },
+  {
+    "id": "mastery",
+    "name": "Mastery",
+    "price": "149/mo",
+    "features": [
+      "Everything in Pro",
+      "1:1 coaching & premium support",
+      "Career roadmap PDF",
+      "Extended document library",
+      "Early access to features",
+      "Quarterly masterclass invite"
+    ],
+    "payhip": "re4Hy"
+  }
+]

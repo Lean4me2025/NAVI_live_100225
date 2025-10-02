@@ -1,0 +1,42 @@
+[
+  {
+    "id": "business",
+    "name": "Business"
+  },
+  {
+    "id": "sales_service",
+    "name": "Sales & Service"
+  },
+  {
+    "id": "technology",
+    "name": "Technology"
+  },
+  {
+    "id": "engineering",
+    "name": "Engineering"
+  },
+  {
+    "id": "healthcare",
+    "name": "Healthcare"
+  },
+  {
+    "id": "creative_media",
+    "name": "Creative & Media"
+  },
+  {
+    "id": "education_training",
+    "name": "Education & Training"
+  },
+  {
+    "id": "operations_logistics",
+    "name": "Operations & Logistics"
+  },
+  {
+    "id": "finance_analytics",
+    "name": "Finance & Analytics"
+  },
+  {
+    "id": "public_legal",
+    "name": "Public Service & Legal"
+  }
+]
