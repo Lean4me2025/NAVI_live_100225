@@ -5,7 +5,38 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NAVI – Dashboard</title>
 <link rel="stylesheet" href="assets/style.css">
-<script defer src="assets/app.js"></script>
+<script defer src="assets/app.js">
+function renderPlanBadgeStrong(){
+  const el = qs('#plan-badge'); if(!el) return;
+  const p = getPlan(); el.textContent = 'Plan: ' + planName(p);
+}
+function rank(p){ return p==='mastery'?3:(p==='pro'?2:1); }
+
+function renderToolBuckets(){
+  const p = getPlan(), my = rank(p);
+  const inc = qs('#tools-included'), upg = qs('#tools-upgrade');
+  const upgNote = qs('#upgrade-note');
+  upgNote.textContent = '(upgrade to ' + (p==='starter'?'Pro or Mastery':(p==='pro'?'Mastery':'—')) + ')';
+
+  inc.innerHTML = ''; upg.innerHTML='';
+  CATALOG.forEach(t=>{
+    const required = rank(t.plan);
+    const unlocked = my >= required;
+    const card = document.createElement('div');
+    card.className = 'card' + (unlocked? '' : ' locked');
+    card.innerHTML = `
+      <div class="kicker">${t.plan.toUpperCase()}</div>
+      <h3 style="margin:6px 0">${t.title}</h3>
+      <p class="sub">${t.desc}</p>
+      <div class="toolbar">
+        ${unlocked ? `<a class="button" href="${t.href}">Open</a>` : `<a class="button secondary" href="index.html">See plans</a>`}
+      </div>
+    `;
+    (unlocked ? inc : upg).appendChild(card);
+  });
+}
+
+</script>
 </head>
 <body>
 <div class="container">
@@ -14,7 +45,7 @@
       <div class="logo"></div>
       <h1>NAVI Dashboard</h1>
     </div>
-    <div id="plan-badge" class="badge">Plan: –</div>
+    <div id="plan-badge" class="badge plan-badge">Plan: –</div>
   </div>
 
   <div class="grid cols-3">
@@ -46,11 +77,16 @@
     </div>
   </div>
 
+  
   <div class="card">
     <div class="kicker">Tools</div>
-    <h2>Unlocked by Plan</h2>
-    <div id="tools" class="grid cols-3"></div>
+    <h2 class="section-title">Included in your plan</h2>
+    <div id="tools-included" class="grid cols-3"></div>
+    <hr>
+    <h2 class="section-title">Available if you upgrade <span id="upgrade-note" class="subtle"></span></h2>
+    <div id="tools-upgrade" class="grid cols-3"></div>
   </div>
+              
 
   <footer class="center">Execute with clarity. Multiply with excellence.</footer>
 </div>
@@ -102,8 +138,39 @@ function renderNovaSnap(){
   `;
 }
 
-document.addEventListener('DOMContentLoaded', ()=>{ renderTools(); renderNovaSnap(); });
-document.addEventListener('planchange', renderTools);
+document.addEventListener('DOMContentLoaded', ()=>{ renderTools(); renderNovaSnap(); renderPlanBadgeStrong(); renderToolBuckets(); });
+document.addEventListener('planchange', ()=>{ renderTools(); renderPlanBadgeStrong(); renderToolBuckets(); });
+
+function renderPlanBadgeStrong(){
+  const el = qs('#plan-badge'); if(!el) return;
+  const p = getPlan(); el.textContent = 'Plan: ' + planName(p);
+}
+function rank(p){ return p==='mastery'?3:(p==='pro'?2:1); }
+
+function renderToolBuckets(){
+  const p = getPlan(), my = rank(p);
+  const inc = qs('#tools-included'), upg = qs('#tools-upgrade');
+  const upgNote = qs('#upgrade-note');
+  upgNote.textContent = '(upgrade to ' + (p==='starter'?'Pro or Mastery':(p==='pro'?'Mastery':'—')) + ')';
+
+  inc.innerHTML = ''; upg.innerHTML='';
+  CATALOG.forEach(t=>{
+    const required = rank(t.plan);
+    const unlocked = my >= required;
+    const card = document.createElement('div');
+    card.className = 'card' + (unlocked? '' : ' locked');
+    card.innerHTML = `
+      <div class="kicker">${t.plan.toUpperCase()}</div>
+      <h3 style="margin:6px 0">${t.title}</h3>
+      <p class="sub">${t.desc}</p>
+      <div class="toolbar">
+        ${unlocked ? `<a class="button" href="${t.href}">Open</a>` : `<a class="button secondary" href="index.html">See plans</a>`}
+      </div>
+    `;
+    (unlocked ? inc : upg).appendChild(card);
+  });
+}
+
 </script>
 </body>
 </html>

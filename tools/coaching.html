@@ -17,6 +17,19 @@
     <a class="button" href="#" onclick="alert('Replace with your private booking link.');return false;">Open Booking</a>
     <p class="hint">Admin: edit tools/coaching.html to hardcode your private link when ready.</p>
   </div>
+
+  <div class="card">
+    <div class="toolbar">
+      <button class="button ghost" onclick="go('../dashboard.html')">Back to Dashboard</button>
+      <button class="button secondary" onclick="goPrev()">◀ Prev</button>
+      <button class="button" onclick="goNext()">Next ▶</button>
+    </div>
+  </div>
+
 </div>
+<script>
+function goNext(){ goNextFrom(coaching); }
+function goPrev(){ goPrevFrom(coaching); }
+</script>
 </body>
 </html>

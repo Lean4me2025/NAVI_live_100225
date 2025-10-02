@@ -1,10 +1,10 @@
 
 :root{
   --bg:#0b1220;
-  --card:#111a2b;
+  --card:#1f305a;
   --accent:#f7c948;
-  --text:#e6edf7;
-  --muted:#9fb3c8;
+  --text:#f5f8ff;
+  --muted:#c4d7ff;
   --ok:#16a34a;
   --warn:#eab308;
   --danger:#ef4444;
@@ -44,3 +44,46 @@ footer{color:#7d8db0;margin:24px 0}
 .notice{border-left:4px solid var(--warn);padding:10px 12px;background:#0d172a;margin:12px 0;border-radius:6px}
 .ok{color:var(--ok)} .warn{color:var(--warn)} .danger{color:var(--danger)}
 .print-note{display:none}@media print {.header,.toolbar,.print-hide{display:none}.print-note{display:block}}
+
+/* Contrast & polish update v2 */
+.card{border-top:1px solid #2f4370}
+.card h2,.card h3,.card .kicker{color:#ffffff}
+.input,textarea,select{background:#1f305a;border:1px solid #2f4370;color:#f5f8ff}
+.input::placeholder,textarea::placeholder{color:#c4d7ff}
+.input:focus,textarea:focus,select:focus{border-color:var(--accent);box-shadow:0 0 8px rgba(247,201,72,.35);outline:none}
+.tag{background:#2e4470;border:1px solid #3d5a91;color:#ffffff}
+.button:hover{box-shadow:0 0 10px rgba(247,201,72,.4)}
+
+/* --- Plan badge UX --- */
+.plan-badge{background:var(--accent); color:#111; border:none; font-weight:700; box-shadow:0 0 12px rgba(247,201,72,.35)}
+.plan-badge .small{font-weight:600; opacity:.8}
+
+/* --- Locked cards --- */
+.locked{opacity:.55; position:relative; filter:saturate(.6)}
+.locked::after{
+  content:"🔒 Upgrade to unlock";
+  position:absolute; right:12px; bottom:12px; font-size:.85rem;
+  color:#fff; background:rgba(15,22,40,.7); padding:6px 10px; border-radius:999px; border:1px solid #2f4370;
+}
+
+/* --- Section titles --- */
+.section-title{margin:4px 0 8px 0; font-size:1.1rem; font-weight:700; color:#fff}
+.subtle{color:var(--muted)}
+
+/* --- Highlight pills for NOVA SNAP --- */
+#nova-snap .tag{
+  background: linear-gradient(135deg, #2f5ebf, #1e3d78);
+  color: #ffffff;
+  border: 1px solid #f7c948; /* gold accent */
+  font-weight: 600;
+  box-shadow: 0 0 8px rgba(247,201,72,0.35);
+}
+
+/* --- Included tools glow --- */
+.included{
+  border-top: 3px solid #f7c948;
+  box-shadow: 0 0 10px rgba(247,201,72,0.22);
+}
+.included .button{ /* primary button stays bright */
+  box-shadow: 0 0 8px rgba(247,201,72,0.24);
+}

@@ -45,3 +45,34 @@ function renderPlanBadge(){
 function go(href){ location.href = href; }
 
 document.addEventListener('DOMContentLoaded', renderPlanBadge);
+
+
+// ------- Tool navigation helpers -------
+const TOOL_ORDER = {
+  starter: ['resume','jobs'],
+  pro:     ['resume','jobs','cover','intel','filters'],
+  mastery: ['resume','jobs','cover','intel','filters','roadmap','coaching']
+};
+function toolPath(id){ return `tools/${id}.html`; }
+function nextToolId(currentId){
+  const tier = getPlan();
+  const order = TOOL_ORDER[tier];
+  const idx = order.indexOf(currentId);
+  if(idx>=0 && idx<order.length-1) return order[idx+1];
+  return null;
+}
+function prevToolId(currentId){
+  const tier = getPlan();
+  const order = TOOL_ORDER[tier];
+  const idx = order.indexOf(currentId);
+  if(idx>0) return order[idx-1];
+  return null;
+}
+function goNextFrom(currentId){
+  const nxt = nextToolId(currentId);
+  if(nxt) go(toolPath(nxt)); else go('../dashboard.html');
+}
+function goPrevFrom(currentId){
+  const prv = prevToolId(currentId);
+  if(prv) go(toolPath(prv)); else go('../dashboard.html');
+}
