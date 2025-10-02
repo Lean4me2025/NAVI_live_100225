@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Advanced Filters + Saved Search</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script defer src="../assets/app.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="brand"><div class="logo"></div><h1>Advanced Filters + Saved Search</h1></div>
+    <div id="plan-badge" class="badge">Plan: –</div>
+  </div>
+
+  <div class="grid cols-2">
+    <div class="card">
+      <div class="kicker">Filters</div>
+      <label>Target roles<input id="roles" class="input" placeholder="e.g., Business Analyst; Process Excellence Lead"></label>
+      <label>Locations<input id="locs" class="input" placeholder="e.g., Remote; Phoenix; Dallas"></label>
+      <label>Salary min ($)<input id="min" class="input" type="number" placeholder="90000"></label>
+      <label>Keywords include<input id="inc" class="input" placeholder="SOX, Lean Six Sigma, Power BI"></label>
+      <label>Keywords exclude<input id="exc" class="input" placeholder="Salesforce admin, unpaid"></label>
+      <div class="toolbar"><button class="button" onclick="saveFilters()">Save Filters</button></div>
+      <small class="hint">These preferences drive future searches (manual for now).</small>
+    </div>
+    <div class="card">
+      <div class="kicker">Saved Searches</div>
+      <input id="searchName" class="input" placeholder="Name this search (e.g., IT Compliance BA – Remote)">
+      <div class="toolbar"><button class="button" onclick="saveSearch()">Save Search</button></div>
+      <div id="savedList" style="margin-top:8px"></div>
+    </div>
+  </div>
+</div>
+<script>
+function saveFilters(){
+  const f = {roles:qs('#roles').value, locs:qs('#locs').value, min:+qs('#min').value||0, inc:qs('#inc').value, exc:qs('#exc').value};
+  save('naviFilters', f); alert('Filters saved.');
+}
+function saveSearch(){
+  const name = qs('#searchName').value.trim(); if(!name) return alert('Name required.');
+  const f = load('naviFilters', {});
+  const list = load('naviSavedSearches', []); list.push({name, criteria:f, savedAt:new Date().toISOString()}); save('naviSavedSearches', list);
+  renderList(); alert('Saved search added.');
+}
+function renderList(){
+  const list = load('naviSavedSearches', []);
+  const wrap = qs('#savedList'); wrap.innerHTML = list.map(s=>`<div class="tag">${s.name}</div>`).join('') || '<span class="hint">No saved searches yet.</span>';
+}
+document.addEventListener('DOMContentLoaded', renderList);
+</script>
+</body>
+</html>

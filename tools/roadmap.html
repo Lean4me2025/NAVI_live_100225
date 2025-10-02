@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Career Roadmap</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script defer src="../assets/app.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="brand"><div class="logo"></div><h1>Career Roadmap</h1></div>
+    <div id="plan-badge" class="badge">Plan: –</div>
+  </div>
+  <div class="card">
+    <div class="kicker">Milestones</div>
+    <textarea id="milestones" class="input" rows="10" placeholder="Q4: Update resume + 6 tailored applications/week\nQ1: Earn SOX control testing credential\nQ2: Lead a cross-functional Lean project\n..."></textarea>
+    <div class="toolbar"><button class="button" onclick="savePlan()">Save</button><button class="button ghost" onclick="window.print()">Print / Save PDF</button></div>
+  </div>
+</div>
+<script>
+function savePlan(){ save('naviRoadmap', {text:qs('#milestones').value, savedAt:new Date().toISOString()}); alert('Saved.'); }
+document.addEventListener('DOMContentLoaded', ()=>{ const s=load('naviRoadmap', null); if(s) qs('#milestones').value=s.text; });
+</script>
+</body>
+</html>

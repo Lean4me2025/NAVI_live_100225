@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NAVI – Strategy (Five W’s + How)</title>
+<link rel="stylesheet" href="assets/style.css">
+<script defer src="assets/app.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="brand">
+      <div class="logo"></div>
+      <h1>NAVI</h1>
+    </div>
+    <div id="plan-badge" class="badge">Plan: –</div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Step 1</div>
+    <h2>Five W’s + How</h2>
+    <p class="lead">Rooted in your NOVA results. Modify anything — this is your living strategy.</p>
+  </div>
+
+  <div class="grid cols-2">
+    <div class="card">
+      <div class="kicker">Who</div>
+      <textarea id="who" rows="5" class="input" placeholder="Who you are — integrate traits, strengths, leadership style"></textarea>
+      <small class="hint">Auto-filled from NOVA traits.</small>
+    </div>
+    <div class="card">
+      <div class="kicker">What</div>
+      <textarea id="what" rows="5" class="input" placeholder="What roles fit — mapped to categories/traits"></textarea>
+      <small class="hint">Auto-filled from NOVA roles.</small>
+    </div>
+    <div class="card">
+      <div class="kicker">Why</div>
+      <textarea id="why" rows="4" class="input" placeholder="Your motivation/legacy statement"></textarea>
+    </div>
+    <div class="card">
+      <div class="kicker">When</div>
+      <textarea id="when" rows="4" class="input" placeholder="Timing, training gaps, market cycles"></textarea>
+    </div>
+    <div class="card">
+      <div class="kicker">Where</div>
+      <textarea id="where" rows="4" class="input" placeholder="Location preferences, remote/hybrid, relocation comfort"></textarea>
+    </div>
+    <div class="card">
+      <div class="kicker">How</div>
+      <textarea id="how" rows="4" class="input" placeholder="Using NAVI tools to execute"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="toolbar">
+      <button class="button" onclick="saveStrategy()">Save Strategy</button>
+      <button class="button secondary" onclick="go('dashboard.html')">Go to My Dashboard</button>
+      <button class="button ghost" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+    <small class="hint">Your strategy saves locally in your browser.</small>
+    <div class="print-note">Printed from NAVI Strategy.</div>
+  </div>
+
+  <footer class="center">NOVA → NAVI, purpose to plan.</footer>
+</div>
+
+<script>
+function hydrate(){
+  const nova = getNova();
+  const s = load('naviStrategy', null) || {};
+  const who = qs('#who'), wht=qs('#what'), why=qs('#why'), when=qs('#when'), where=qs('#where'), how=qs('#how');
+  if(nova){
+    if(!s.who) who.value = `Traits: ${nova.traits?.join(', ')||''}\nReflection: ${nova.reflection||''}`.trim();
+    if(!s.what) wht.value = `Roles: ${nova.roles?.join(', ')||''}\nCategories: ${nova.categories?.join(', ')||''}`.trim();
+    if(!s.why)  why.value = `Purpose: ${nova.reflection||'To serve, build, and multiply value.'}`;
+  }
+  // Merge saved
+  who.value = s.who ?? who.value;
+  wht.value = s.what ?? wht.value;
+  why.value = s.why ?? why.value;
+  when.value = s.when ?? when.value;
+  where.value = s.where ?? where.value;
+  how.value = s.how ?? how.value;
+}
+function saveStrategy(){
+  const s = {
+    who: qs('#who').value.trim(),
+    what: qs('#what').value.trim(),
+    why: qs('#why').value.trim(),
+    when: qs('#when').value.trim(),
+    where: qs('#where').value.trim(),
+    how: qs('#how').value.trim(),
+    savedAt: new Date().toISOString()
+  };
+  save('naviStrategy', s);
+  alert('Strategy saved.');
+}
+document.addEventListener('DOMContentLoaded', hydrate);
+</script>
+</body>
+</html>

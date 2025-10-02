@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Job Suggestions</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script defer src="../assets/app.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="brand"><div class="logo"></div><h1>Job Suggestions</h1></div>
+    <div id="plan-badge" class="badge">Plan: –</div>
+  </div>
+
+  <div class="card">
+    <div id="out">Loading suggestions…</div>
+  </div>
+</div>
+<script>
+const MAP = {
+  "Analytical":[ "Business Analyst (IT/Compliance)", "Data Analyst", "Process Intelligence Analyst" ],
+  "Process-Driven":[ "Process Improvement Lead", "Operations Excellence Manager", "BPM Specialist" ],
+  "People Developer":[ "Training & Enablement Lead", "Change Management Analyst" ],
+  "Systems Thinker":[ "Product Owner (Analytics)", "Solution Architect (Ops)" ],
+  "Persistent":[ "Program Coordinator", "Project Manager" ]
+};
+function suggest(){
+  const n = getNova()||{traits:[]};
+  const seen = new Set();
+  const recs = [];
+  (n.traits||[]).forEach(t=>{
+    const arr = MAP[t]; if(arr){ arr.forEach(r=>{ if(!seen.has(r)){ seen.add(r); recs.push(r); } }); }
+  });
+  const out = qs('#out');
+  if(recs.length===0){ out.innerHTML = '<span class="warn">No mapped suggestions for your traits yet.</span>'; return; }
+  out.innerHTML = '<div class="kicker">Aligned Roles</div>' + recs.map(r=>`<div class="tag">${r}</div>`).join('');
+}
+document.addEventListener('DOMContentLoaded', suggest);
+</script>
+</body>
+</html>

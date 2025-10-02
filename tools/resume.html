@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Resume Builder</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script defer src="../assets/app.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="brand"><div class="logo"></div><h1>Resume Builder</h1></div>
+    <div id="plan-badge" class="badge">Plan: –</div>
+  </div>
+  <div class="grid cols-2">
+    <div class="card">
+      <div class="kicker">Profile</div>
+      <input id="name" class="input" placeholder="Full name">
+      <input id="title" class="input" placeholder="Target title (e.g., Business Analyst, Process Excellence)">
+      <textarea id="summary" class="input" rows="5" placeholder="Professional summary (3–5 lines)"></textarea>
+      <small class="hint">Tip: weave in NOVA traits and outcomes.</small>
+    </div>
+    <div class="card">
+      <div class="kicker">Contact</div>
+      <input id="email" class="input" placeholder="Email">
+      <input id="phone" class="input" placeholder="Phone">
+      <input id="location" class="input" placeholder="Location">
+      <input id="links" class="input" placeholder="Links (LinkedIn, portfolio)">
+    </div>
+    <div class="card">
+      <div class="kicker">Experience</div>
+      <textarea id="experience" class="input" rows="10" placeholder="- Role | Company | Dates\n  • Impact bullet 1\n  • Impact bullet 2"></textarea>
+    </div>
+    <div class="card">
+      <div class="kicker">Skills / Education</div>
+      <textarea id="skills" class="input" rows="6" placeholder="Lean Six Sigma (Black Belt), BPM, BTM/BTMN 2.0, SOX/IT Compliance, Power BI, SQL, ..."></textarea>
+      <textarea id="education" class="input" rows="4" placeholder="Degree(s), certs"></textarea>
+    </div>
+  </div>
+  <div class="card">
+    <div class="toolbar">
+      <button class="button" onclick="saveData()">Save</button>
+      <button class="button secondary" onclick="renderDocument()">Preview</button>
+      <button class="button ghost" onclick="window.print()">Print / Save PDF</button>
+    </div>
+  </div>
+  <div id="doc" class="card print-note"></div>
+</div>
+
+<script>
+function hydrate(){
+  const n = getNova();
+  if(n){
+    qs('#name').value = n.name || '';
+    qs('#summary').value ||= `Purpose-led ${n.traits?.slice(0,3).join(', ')} professional bridging ${n.categories?.join(' & ')}; roles: ${n.roles?.slice(0,2).join(', ')}`;
+  }
+  const saved = load('naviResume', {});
+  Object.entries(saved).forEach(([k,v])=>{ const el = qs('#'+k); if(el) el.value = v; });
+}
+function saveData(){
+  const data = ['name','title','summary','email','phone','location','links','experience','skills','education']
+    .reduce((acc,k)=>{ acc[k]=qs('#'+k).value; return acc; },{});
+  save('naviResume', data);
+  alert('Saved.');
+}
+function renderDocument(){
+  const d = load('naviResume', {});
+  const el = qs('#doc');
+  el.innerHTML = `
+    <h2 style="margin:0">${d.name||''}</h2>
+    <div>${d.title||''}</div>
+    <div>${d.email||''} • ${d.phone||''} • ${d.location||''} • ${d.links||''}</div>
+    <hr>
+    <div><b>Summary</b><br>${(d.summary||'').replace(/\n/g,'<br>')}</div>
+    <hr>
+    <div><b>Experience</b><br>${(d.experience||'').replace(/\n/g,'<br>')}</div>
+    <hr>
+    <div><b>Skills</b><br>${(d.skills||'').replace(/\n/g,'<br>')}</div>
+    <div><b>Education</b><br>${(d.education||'').replace(/\n/g,'<br>')}</div>
+  `;
+  alert('Scroll to the bottom for a print-friendly view.');
+}
+document.addEventListener('DOMContentLoaded', hydrate);
+</script>
+</body>
+</html>

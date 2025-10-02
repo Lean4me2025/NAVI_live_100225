@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NAVI – Dashboard</title>
+<link rel="stylesheet" href="assets/style.css">
+<script defer src="assets/app.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="brand">
+      <div class="logo"></div>
+      <h1>NAVI Dashboard</h1>
+    </div>
+    <div id="plan-badge" class="badge">Plan: –</div>
+  </div>
+
+  <div class="grid cols-3">
+    <div class="card">
+      <div class="kicker">Flow</div>
+      <h2>Your Next Steps</h2>
+      <ol class="list">
+        <li>Confirm your plan (Starter/Pro/Mastery)</li>
+        <li>Finish your <a href="strategy.html">Five W’s + How</a></li>
+        <li>Use unlocked tools below</li>
+      </ol>
+      <div class="toolbar" style="margin-top:8px">
+        <button class="button ghost" onclick="go('index.html')">Change Plan</button>
+        <button class="button" onclick="go('strategy.html')">Edit Strategy</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">NOVA Snap</div>
+      <h2>Highlights</h2>
+      <div id="nova-snap" class="sub">Pulling from your NOVA results…</div>
+    </div>
+
+    <div class="card">
+      <div class="kicker">Upgrade</div>
+      <h2>Pro Suite / Mastery</h2>
+      <p>Unlock every tool and future updates:</p>
+      <a href="https://payhip.com/b/re4Hy" class="button">Buy NAVI Pro Suite</a>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Tools</div>
+    <h2>Unlocked by Plan</h2>
+    <div id="tools" class="grid cols-3"></div>
+  </div>
+
+  <footer class="center">Execute with clarity. Multiply with excellence.</footer>
+</div>
+
+<script>
+const CATALOG = [
+  {id:'resume', title:'Resume Builder', plan:'starter', href:'tools/resume.html', desc:'Structured resume with print-to-PDF.'},
+  {id:'jobs', title:'Job Suggestions', plan:'starter', href:'tools/jobs.html', desc:'Roles aligned to your traits.'},
+  {id:'cover', title:'Cover Letter Generator', plan:'pro', href:'tools/cover-letter.html', desc:'Unlimited tailored letters.'},
+  {id:'intel', title:'Company Intel Outline', plan:'pro', href:'tools/company-intel.html', desc:'Research prompts + structure.'},
+  {id:'filters', title:'Advanced Filters + Saved Search', plan:'pro', href:'tools/filters.html', desc:'Focus your hunt, save prefs.'},
+  {id:'roadmap', title:'Career Roadmap (PDF)', plan:'mastery', href:'tools/roadmap.html', desc:'Milestones + timeline export.'},
+  {id:'coaching', title:'Priority Coaching Link', plan:'mastery', href:'tools/coaching.html', desc:'Get help faster when needed.'},
+];
+
+function tierRank(p){ return p==='mastery'?3:(p==='pro'?2:1); }
+function reqRank(p){ return p==='mastery'?3:(p==='pro'?2:1); }
+
+function renderTools(){
+  const p = getPlan();
+  const myRank = tierRank(p);
+  const wrap = qs('#tools');
+  wrap.innerHTML = '';
+  CATALOG.forEach(t => {
+    const unlocked = myRank >= reqRank(t.plan);
+    const el = document.createElement('div');
+    el.className = 'card';
+    el.innerHTML = `
+      <div class="kicker">${t.plan.toUpperCase()}</div>
+      <h3 style="margin:6px 0">${t.title}</h3>
+      <p class="sub">${t.desc}</p>
+      <div class="toolbar">
+        ${unlocked ? `<a class="button" href="${t.href}">Open</a>` : `<a class="button secondary" href="index.html">Upgrade to unlock</a>`}
+      </div>
+    `;
+    wrap.appendChild(el);
+  });
+}
+
+function renderNovaSnap(){
+  const n = getNova();
+  const el = qs('#nova-snap');
+  if(!n){ el.innerHTML = '<span class="warn">No NOVA data found. Load a sample from the Welcome page.</span>'; return; }
+  el.innerHTML = `
+    <div class="tag">Name: ${n.name || '—'}</div>
+    <div class="tag">Categories: ${(n.categories||[]).join(', ')||'—'}</div>
+    <div class="tag">Top Traits: ${(n.traits||[]).slice(0,5).join(', ')||'—'}</div>
+    <div class="tag">Roles: ${(n.roles||[]).slice(0,3).join(', ')||'—'}</div>
+  `;
+}
+
+document.addEventListener('DOMContentLoaded', ()=>{ renderTools(); renderNovaSnap(); });
+document.addEventListener('planchange', renderTools);
+</script>
+</body>
+</html>

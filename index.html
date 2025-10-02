@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NAVI – Welcome</title>
+<link rel="stylesheet" href="assets/style.css">
+<script defer src="assets/app.js"></script>
+<script type="text/javascript" src="https://payhip.com/payhip.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="brand">
+      <div class="logo"></div>
+      <h1>NAVI</h1>
+    </div>
+    <div id="plan-badge" class="badge">Plan: –</div>
+  </div>
+
+  <div class="card center" style="padding:28px">
+    <div style="max-width:760px">
+      <div class="kicker">Welcome</div>
+      <div class="big-welcome">Welcome to NAVI</div>
+      <p class="lead sub">I’ll turn your NOVA purpose and traits into a step-by-step career strategy — then equip you with the exact tools to execute.</p>
+      <div class="notice">
+        <b>Heads up:</b> If you’ve just finished NOVA, your results are already attached. If not, you can still explore with a sample profile below.
+      </div>
+      <div style="margin-top:12px" class="toolbar">
+        <button class="button" onclick="go('strategy.html')">Start My Strategy</button>
+        <button class="button secondary" onclick="loadSample()">Load Sample NOVA Profile</button>
+        <div class="badge">Or choose your plan:</div>
+        <button class="button ghost" onclick="setPlan('starter')">Starter</button>
+        <button class="button ghost" onclick="setPlan('pro')">Pro</button>
+        <button class="button ghost" onclick="setPlan('mastery')">Mastery</button>
+      </div>
+      <small class="hint">Changing plan updates your unlocked tools in the Dashboard.</small>
+      <hr>
+      <div class="grid cols-3">
+        <div class="card">
+          <div class="kicker">Starter</div>
+          <h2>Essentials</h2>
+          <ul class="list">
+            <li>Resume Builder</li>
+            <li>Basic Job Suggestions</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="kicker">Pro</div>
+          <h2>Get Traction</h2>
+          <ul class="list">
+            <li>Everything in Starter</li>
+            <li>Unlimited Cover Letters</li>
+            <li>Company Intel Outlines</li>
+            <li>Advanced Filters + Saved Search</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="kicker">Mastery</div>
+          <h2>Level Up</h2>
+          <ul class="list">
+            <li>Everything in Pro</li>
+            <li>Career Roadmap PDF</li>
+            <li>Priority Coaching Link</li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <div class="card">
+        <div class="kicker">Upgrade</div>
+        <h2>Unlock the full NAVI Pro Suite</h2>
+        <p>Ready to go further? Upgrade your plan:</p>
+        <a href="https://payhip.com/b/re4Hy" class="payhip-buy-button" data-theme="green" data-product="re4Hy">Buy NAVI Pro Suite (Mastery)</a>
+      </div>
+    </div>
+  </div>
+
+  <footer class="center">
+    Built with love for NOVA → NAVI flow.
+  </footer>
+</div>
+
+<script>
+function loadSample(){
+  const sample = {
+    name:"Sample Explorer",
+    reflection:"Transitioning into data/ops leadership with a servant-leader bent; prefers process + analytics + teaching.",
+    categories:["Business & Operations","Technology & Data"],
+    traits:["Analytical","Process-Driven","People Developer","Systems Thinker","Persistent","Purpose-Led"],
+    roles:["Business Process Manager","Business Analyst (IT/Compliance)","Operations Excellence Lead","Analytics Product Owner"]
+  };
+  localStorage.setItem('novaResults', JSON.stringify(sample));
+  alert("Sample NOVA profile loaded. Proceed to Strategy.");
+}
+</script>
+</body>
+</html>

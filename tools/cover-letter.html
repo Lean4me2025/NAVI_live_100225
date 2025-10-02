@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cover Letter Generator</title>
+<link rel="stylesheet" href="../assets/style.css">
+<script defer src="../assets/app.js"></script>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="brand"><div class="logo"></div><h1>Cover Letters</h1></div>
+    <div id="plan-badge" class="badge">Plan: –</div>
+  </div>
+
+  <div class="card">
+    <div class="kicker">Role & Company</div>
+    <input id="company" class="input" placeholder="Company name">
+    <input id="role" class="input" placeholder="Role title">
+    <textarea id="reqs" class="input" rows="5" placeholder="Paste key requirements from the job posting"></textarea>
+  </div>
+  <div class="card">
+    <div class="kicker">Your Angle</div>
+    <textarea id="angle" class="input" rows="5" placeholder="Tie NOVA traits + outcomes to the role"></textarea>
+  </div>
+  <div class="card">
+    <div class="toolbar">
+      <button class="button" onclick="generate()">Generate Letter</button>
+      <button class="button ghost" onclick="window.print()">Print / Save PDF</button>
+    </div>
+  </div>
+  <div id="out" class="card print-note"></div>
+</div>
+
+<script>
+function generate(){
+  const n = getNova()||{};
+  const company = qs('#company').value.trim();
+  const role = qs('#role').value.trim();
+  const reqs = qs('#reqs').value.trim();
+  const angle = qs('#angle').value.trim();
+  const traits = (n.traits||[]).slice(0,5).join(', ');
+  const name = n.name || 'Candidate';
+  const body = `Dear Hiring Team at ${company},
+
+I’m excited to apply for the ${role}. Rooted in NOVA, my top strengths include ${traits}. I combine a servant-leader approach with a builder’s mindset to drive measurable outcomes.
+
+Highlights aligned to your needs:
+${reqs.split('\n').map(l=>'• '+l).join('\n')}
+
+Why me:
+${angle || 'I connect process excellence with data-driven insight, turning ambiguity into execution with repeatable systems.'}
+
+Thank you for your time — I’d love to discuss how I can contribute at ${company}.
+
+Sincerely,
+${name}`;
+  qs('#out').innerHTML = `<pre style="white-space:pre-wrap">${body}</pre>`;
+}
+</script>
+</body>
+</html>
